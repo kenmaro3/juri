@@ -10,7 +10,7 @@ import AuthenticationServices
 import Alamofire
 
 class PasskeysHandler: NSObject, ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate {
-  let domain = "juri.rayriffy.com"
+  let domain = "1417-211-2-3-199.ngrok-free.app"
   var authenticationAnchor: ASPresentationAnchor?
   var isPerformingModalReqest = false
   
@@ -23,7 +23,7 @@ class PasskeysHandler: NSObject, ASAuthorizationControllerPresentationContextPro
   }
 
   func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-    return authenticationAnchor!
+    return authenticationAnchor ?? ASPresentationAnchor()
   }
   
   func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
@@ -54,8 +54,11 @@ class PasskeysHandler: NSObject, ASAuthorizationControllerPresentationContextPro
         ]
       ]
       
+      print("called!!!")
+      
       AF.request(
-        "https://juri.rayriffy.com/api/login",
+        //"https://juri.rayriffy.com/api/login",
+        "https://1417-211-2-3-199.ngrok-free.app/api/login",
         method: .post,
         parameters: payload,
         encoding: JSONEncoding.default
@@ -88,8 +91,10 @@ class PasskeysHandler: NSObject, ASAuthorizationControllerPresentationContextPro
               "type": "public-key",
               "response": response
           ]
-          AF.request("https://polyset.xyz:5173/api/register", method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in
+          print("debug20")
+          AF.request("https://1417-211-2-3-199.ngrok-free.app/api/register", method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in
               if (response.response?.statusCode == 200) {
+                print("debug21")
                   completionHandler()
               } else {
                   print("Error: \(response.error?.errorDescription ?? "unknown error")")
@@ -101,9 +106,12 @@ class PasskeysHandler: NSObject, ASAuthorizationControllerPresentationContextPro
     let authenticationController = ASAuthorizationController(
       authorizationRequests: authorizationRequest
     )
+    print("debug10")
     authenticationController.delegate = self
     authenticationController.presentationContextProvider = self
+    print("debug11")
     authenticationController.performRequests()
+    print("debug12")
   }
   func getCredentials(allowedCredentials: [AllowedCredential], challenge: String) {
     let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(

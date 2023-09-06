@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct RegisterGetResponse: Codable {
+struct RegisterGetResponse: Codable{
   var challenge: String
   var uid: String
 }

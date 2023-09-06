@@ -50,7 +50,8 @@ class UserSession: ObservableObject {
 
     AF
       .request(
-        "https://juri.rayriffy.com/api/user",
+        //"https://juri.rayriffy.com/api/user",
+        "https://1417-211-2-3-199.ngrok-free.app/api/user",
         method: .post,
         parameters: [
           "token": self.activeAuthenticationToken
@@ -62,6 +63,7 @@ class UserSession: ObservableObject {
         case .success(let userResponse):
           let json = JSON(userResponse)
           
+          print("debug30")
           print(json)
 
           if (json["success"].boolValue == true) {
@@ -91,11 +93,14 @@ class UserSession: ObservableObject {
       }
   }
   func getRegistrationOptions(username: String, completionHandler: @escaping (APIResponseWithData<RegisterGetResponse>) -> Void) {
+    print("here register get")
     AF
-      .request("https://juri.rayriffy.com/api/register?username=\(username)", method: .get)
+      //.request("https://juri.rayriffy.com/api/register?username=\(username)", method: .get)
+      .request("https://1417-211-2-3-199.ngrok-free.app/api/register?username=\(username)", method: .get)
       .responseDecodable(of: APIResponseWithData<RegisterGetResponse>.self) { response in
       switch response.result {
       case .success(let registerResponse):
+        print("registerResponse: \(registerResponse)")
         completionHandler(registerResponse)
       case .failure:
         print("Error: \(response.error?.errorDescription ?? "unknown error")")
@@ -107,13 +112,17 @@ class UserSession: ObservableObject {
   }
   
   func registerWith(userName: String) async {
-    let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: "polyset.xyz")
+    let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: "1417-211-2-3-199.ngrok-free.app")
     getRegistrationOptions(username: userName) { registerGetResponse in
       let challenge = Data(base64Encoded: registerGetResponse.data.challenge)
       let userID = Data(base64Encoded: registerGetResponse.data.uid)
+      print("debug1")
       let registrationRequest = publicKeyCredentialProvider.createCredentialRegistrationRequest(challenge: challenge!,
                                                                                                 name: userName, userID: userID!)
+      print("debug2")
+
       self.passkeysHandler!.registrationRequest(authorizationRequest: [registrationRequest])
+      print("debug3")
       
 
       
@@ -129,15 +138,19 @@ class UserSession: ObservableObject {
     await MainActor.run {
       self.isAuthenticating = true
     }
+    print("here: \(username)")
     AF
-      .request("https://juri.rayriffy.com/api/login", parameters: ["username": username])
+      //.request("https://juri.rayriffy.com/api/login", parameters: ["username": username])
+      .request("https://1417-211-2-3-199.ngrok-free.app/api/login", parameters: ["username": username])
       .responseDecodable(of: APIResponseWithData<LoginGetResponse>.self) { response in
         switch response.result {
         case .success(let loginGetResponse):
+          print("here2: \(loginGetResponse)")
           self.passkeysHandler!.getCredentials(
             allowedCredentials: loginGetResponse.data.allowedCredentials,
             challenge: loginGetResponse.data.challenge
           )
+          print("here3")
           break
         case .failure(let error):
           print("failed to fetch GET /api/login: \(error)")

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct LoginGetResponse: Codable {
+struct LoginGetResponse: Decodable, Encodable {
   var challenge: String
   var allowedCredentials: [AllowedCredential]
 }

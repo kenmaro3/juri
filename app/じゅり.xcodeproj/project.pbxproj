@@ -28,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A3D8ACE2ACFBCD10075D929 /* -----Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "-----Info.plist"; sourceTree = "<group>"; };
 		C0F0077C296EDC6200B027D6 /* RegisterGetResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterGetResponse.swift; sourceTree = "<group>"; };
 		F21AE9F928A3A764008EBF6B /* じゅり.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "じゅり.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F21AE9FC28A3A764008EBF6B /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -64,6 +65,7 @@
 		F21AE9F028A3A764008EBF6B = {
 			isa = PBXGroup;
 			children = (
+				0A3D8ACE2ACFBCD10075D929 /* -----Info.plist */,
 				F21AE9FB28A3A764008EBF6B /* じゅり */,
 				F21AE9FA28A3A764008EBF6B /* Products */,
 			);
@@ -361,6 +363,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BE_API_HOST = "87fd-2001-f70-96a0-3800-583d-da01-f9c7-e252.ngrok-free.app";
 				CODE_SIGN_ENTITLEMENTS = "じゅり/じゅり.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -368,6 +371,7 @@
 				DEVELOPMENT_TEAM = B4C7245FA7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "-----Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "じゅり";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -397,6 +401,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				BE_API_HOST = "";
 				CODE_SIGN_ENTITLEMENTS = "じゅり/じゅり.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -404,6 +409,7 @@
 				DEVELOPMENT_TEAM = B4C7245FA7;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "-----Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "じゅり";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

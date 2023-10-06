@@ -94,14 +94,17 @@ export const POST: RequestHandler = async event => {
     signature: decodeBase64(response.signature),
   }
 
+
   const clientData: ClientData = JSON.parse(
     Buffer.from(decodedRequest.clientDataJSON).toString()
   )
+
 
   // even clientData.challenge is decoded from base64 above, somehow browser navigator sent back as base64url
   const encodedChallenge = encodeBase64(
     Buffer.from(clientData.challenge, 'base64url')
   )
+
 
   // find challenge pair
   const authenticatorPromise = await prisma.authenticator.findFirst({
@@ -171,6 +174,7 @@ export const POST: RequestHandler = async event => {
     Buffer.from(decodedRequest.authenticatorData)
   )
 
+
   const clientDataHash = getSha256Hash(
     Buffer.from(decodedRequest.clientDataJSON)
   )
@@ -180,6 +184,7 @@ export const POST: RequestHandler = async event => {
     decodedAuthData.counterBuf,
     clientDataHash,
   ])
+
   const publicKey = ASN1toPEM(
     Buffer.from(decodeBase64(authenticator.publicKey))
   )
@@ -212,6 +217,7 @@ export const POST: RequestHandler = async event => {
     id: authenticator.user.uid,
     username: authenticator.user.username,
   })
+
 
   return json$1(
     {

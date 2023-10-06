@@ -47,11 +47,12 @@ class UserSession: ObservableObject {
       self.isAuthenticating = true
     }
     print("sync user profile")
+    
+    let api_host = Bundle.main.object(forInfoDictionaryKey: "api_host") as! String
 
     AF
       .request(
-        //"https://juri.rayriffy.com/api/user",
-        "https://1417-211-2-3-199.ngrok-free.app/api/user",
+        "https://\(api_host)/api/user",
         method: .post,
         parameters: [
           "token": self.activeAuthenticationToken
@@ -94,9 +95,10 @@ class UserSession: ObservableObject {
   }
   func getRegistrationOptions(username: String, completionHandler: @escaping (APIResponseWithData<RegisterGetResponse>) -> Void) {
     print("here register get")
+    let api_host = Bundle.main.object(forInfoDictionaryKey: "api_host") as! String
     AF
       //.request("https://juri.rayriffy.com/api/register?username=\(username)", method: .get)
-      .request("https://1417-211-2-3-199.ngrok-free.app/api/register?username=\(username)", method: .get)
+      .request("https://\(api_host)/api/register?username=\(username)", method: .get)
       .responseDecodable(of: APIResponseWithData<RegisterGetResponse>.self) { response in
       switch response.result {
       case .success(let registerResponse):
@@ -112,7 +114,8 @@ class UserSession: ObservableObject {
   }
   
   func registerWith(userName: String) async {
-    let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: "1417-211-2-3-199.ngrok-free.app")
+    let api_host = Bundle.main.object(forInfoDictionaryKey: "api_host") as! String
+    let publicKeyCredentialProvider = ASAuthorizationPlatformPublicKeyCredentialProvider(relyingPartyIdentifier: api_host)
     getRegistrationOptions(username: userName) { registerGetResponse in
       let challenge = Data(base64Encoded: registerGetResponse.data.challenge)
       let userID = Data(base64Encoded: registerGetResponse.data.uid)
@@ -138,10 +141,11 @@ class UserSession: ObservableObject {
     await MainActor.run {
       self.isAuthenticating = true
     }
+    let api_host = Bundle.main.object(forInfoDictionaryKey: "api_host") as! String
     print("here: \(username)")
     AF
       //.request("https://juri.rayriffy.com/api/login", parameters: ["username": username])
-      .request("https://1417-211-2-3-199.ngrok-free.app/api/login", parameters: ["username": username])
+      .request("https://\(api_host)/api/login", parameters: ["username": username])
       .responseDecodable(of: APIResponseWithData<LoginGetResponse>.self) { response in
         switch response.result {
         case .success(let loginGetResponse):

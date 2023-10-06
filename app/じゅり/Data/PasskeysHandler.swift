@@ -10,7 +10,7 @@ import AuthenticationServices
 import Alamofire
 
 class PasskeysHandler: NSObject, ASAuthorizationControllerPresentationContextProviding, ASAuthorizationControllerDelegate {
-  let domain = "1417-211-2-3-199.ngrok-free.app"
+  let domain = Bundle.main.object(forInfoDictionaryKey: "api_host") as! String
   var authenticationAnchor: ASPresentationAnchor?
   var isPerformingModalReqest = false
   
@@ -55,10 +55,11 @@ class PasskeysHandler: NSObject, ASAuthorizationControllerPresentationContextPro
       ]
       
       print("called!!!")
+      let api_host = Bundle.main.object(forInfoDictionaryKey: "api_host") as! String
       
       AF.request(
         //"https://juri.rayriffy.com/api/login",
-        "https://1417-211-2-3-199.ngrok-free.app/api/login",
+        "https://\(api_host)/api/login",
         method: .post,
         parameters: payload,
         encoding: JSONEncoding.default
@@ -91,8 +92,10 @@ class PasskeysHandler: NSObject, ASAuthorizationControllerPresentationContextPro
               "type": "public-key",
               "response": response
           ]
-          print("debug20")
-          AF.request("https://1417-211-2-3-199.ngrok-free.app/api/register", method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in
+    
+          let api_host = Bundle.main.object(forInfoDictionaryKey: "api_host") as! String
+    
+          AF.request("https://\(api_host)/api/register", method: .post, parameters: parameters, encoding: JSONEncoding.default).response { response in
               if (response.response?.statusCode == 200) {
                 print("debug21")
                   completionHandler()

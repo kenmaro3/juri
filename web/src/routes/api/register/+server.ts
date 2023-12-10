@@ -20,6 +20,9 @@ import type { AuthenticatorChallenge } from '../../../core/@types/AuthenticatorC
 export const GET: RequestHandler = async event => {
   const username = event.url.searchParams.get('username')
 
+  console.log("here0")
+  console.log(username)
+
   // if no username is provided, then dead
   if (username === null) {
     return json$1(

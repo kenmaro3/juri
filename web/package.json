@@ -14,15 +14,17 @@
     "format": "prettier --write --plugin-search-dir=. .",
     "prisma:generate": "prisma generate",
     "prisma:commit": "prisma migrate dev",
-    "prisma:deploy": "prisma migrate deploy"
+    "prisma:deploy": "prisma migrate deploy",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
-    "@prisma/client": "^4.13.0",
-    "prisma": "^4.13.0"
+    "@prisma/client": "^4.16.2",
+    "prisma": "^4.16.2"
   },
   "devDependencies": {
     "@hapi/iron": "^7.0.1",
     "@sveltejs/adapter-node": "^1.2.3",
+    "@sveltejs/adapter-vercel": "^3.0.3",
     "@sveltejs/kit": "1.15.7",
     "@tailwindcss/forms": "^0.5.3",
     "@types/cookie": "^0.5.1",

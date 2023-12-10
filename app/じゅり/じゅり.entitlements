@@ -4,8 +4,8 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>webcredentials:87fd-2001-f70-96a0-3800-583d-da01-f9c7-e252.ngrok-free.app?mode=developer</string>
-		<string>webcredentials:87fd-2001-f70-96a0-3800-583d-da01-f9c7-e252.ngrok-free.app</string>
+		<string>webcredentials:ios-passkey-api-kenmaro3.vercel.app?mode=developer</string>
+		<string>webcredentials:0f50-2001-f70-96a0-3800-19db-e81-64c2-46f6.ngrok-free.app</string>
 	</array>
 </dict>
 </plist>

@@ -41,6 +41,7 @@ export const GET: RequestHandler = async event => {
 
   // if array is 0, means there's no user registered yet
   if (authenticators.length === 0) {
+    console.log("here1")
     return json$1(
       {
         message: 'this username has not been registered yet',
@@ -50,6 +51,7 @@ export const GET: RequestHandler = async event => {
       }
     )
   }
+  console.log("here2")
 
   // generate random challenge
   const generatedChallenge = encodeBase64(crypto.randomBytes(32))

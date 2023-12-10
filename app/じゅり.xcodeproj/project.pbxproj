@@ -363,7 +363,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				BE_API_HOST = "87fd-2001-f70-96a0-3800-583d-da01-f9c7-e252.ngrok-free.app";
+				BE_API_HOST = "0f50-2001-f70-96a0-3800-19db-e81-64c2-46f6.ngrok-free.app";
 				CODE_SIGN_ENTITLEMENTS = "じゅり/じゅり.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
